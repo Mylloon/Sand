@@ -6,7 +6,7 @@ app = Flask(__name__, static_url_path="/", static_folder="public")
 app.register_blueprint(index, url_prefix="/index")
 
 
-@app.route('/')
+@app.route("/")
 def root():
     return redirect("index")
 

@@ -4,6 +4,6 @@ from config import Config
 router = Blueprint("index", __name__)
 
 
-@router.route("/")
+@router.route("")
 def index():
     return render_template("index.html", name=Config.name)
