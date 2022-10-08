@@ -14,7 +14,7 @@
         --link-color: rgb(13, 71, 161);
         --link-color-hover: rgb(181, 162, 101);
         --grey: rgb(207, 216, 220);
-        --shadow: rgba(0, 0, 0, 0.5);
+        --shadow: rgba(0, 0, 0, 0.3);
         --border: rgb(45, 40, 22);
     }
 }
@@ -27,7 +27,7 @@
         --link-color: rgb(100, 181, 246);
         --link-color-hover: rgb(175, 154, 88);
         --grey: rgb(55, 71, 79);
-        --shadow: rgba(125, 109, 60, 0.288);
+        --shadow: rgba(125, 109, 60, 0.3);
         --border: rgb(213, 202, 168);
     }
 }
