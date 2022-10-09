@@ -16,6 +16,7 @@
         --grey: rgb(207, 216, 220);
         --shadow: rgba(0, 0, 0, 0.3);
         --border: rgb(45, 40, 22);
+        --font-size: 17px;
     }
 }
 
@@ -29,6 +30,7 @@
         --grey: rgb(55, 71, 79);
         --shadow: rgba(125, 109, 60, 0.3);
         --border: rgb(213, 202, 168);
+        --font-size: 17px;
     }
 }
 
@@ -41,7 +43,7 @@ html {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: Rilu;
-    font-size: 17px;
+    font-size: var(--font-size);
     scroll-behavior: smooth;
 }
 
@@ -80,6 +82,17 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    padding: 0 2rem 0 2rem;
+}
+
+.upload-area > input {
+    opacity: 0;
+    position: absolute;
+    width: 40%;
+    height: 70%;
+    font-size: 30px;
+    cursor: pointer;
 }
 
 .desc-area {
@@ -117,7 +130,7 @@ main {
 }
 
 footer {
-    margin: 5vw;
+    margin: 6vh 0 0 2vw;
     opacity: 0.8;
     letter-spacing: 0.2rem;
 }
