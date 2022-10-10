@@ -11,7 +11,7 @@ const main = () => {
 
     const input = document.getElementById("upload");
     input.onchange = () => {
-        fetchFile(input.files);
+        fetchFile(input.files, input);
     };
 };
 
@@ -19,9 +19,9 @@ const main = () => {
  * Check if they're is only one file and send it
  * @param list List of files
  */
-const fetchFile = (list) => {
+const fetchFile = (list, element = undefined) => {
     if (list.length == 1) {
-        send(list[0]);
+        send(list[0], element);
     }
 };
 
@@ -29,7 +29,16 @@ const fetchFile = (list) => {
  * Send a file to the server
  * @param file File to send
  */
-const send = (file) => {
+const send = (file, element) => {
+    // Show the user a file is uploading
+    if (element) {
+        let parent = element.parentElement;
+        parent.textContent = "";
+        let newText = document.createElement("h3");
+        newText.textContent = "Téléversement...";
+        parent.appendChild(newText);
+    }
+
     // TODO: Encrypt the file before sending it
     const data = new FormData();
     data.append("file", file);
