@@ -3,12 +3,27 @@ window.addEventListener("load", () => main());
 const main = () => {
     Array.from(document.getElementsByClassName("upload-area")).forEach(
         (uploadArea) => {
+            /* Handle event when a file is dropped hover the input area */
             uploadArea.addEventListener("drop", (event) => {
                 fetchFile(event.dataTransfer.files);
+            });
+
+            /* Handle color change when dragging a file hover the input area */
+            const hoverCSS = "upload-area-hovered";
+            uploadArea.addEventListener("dragover", () => {
+                if (!uploadArea.classList.contains(hoverCSS)) {
+                    uploadArea.classList.add(hoverCSS);
+                }
+            });
+            uploadArea.addEventListener("dragleave", () => {
+                if (uploadArea.classList.contains(hoverCSS)) {
+                    uploadArea.classList.remove(hoverCSS);
+                }
             });
         }
     );
 
+    /* Handle when a file is added to the input element */
     const input = document.getElementById("upload");
     input.onchange = () => {
         fetchFile(input.files, input);
