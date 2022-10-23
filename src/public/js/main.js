@@ -1,3 +1,5 @@
+import { gen_RSA_keypair, RSA_enc } from "./rsa.js";
+
 window.addEventListener("load", () => main());
 
 const main = () => {
@@ -54,7 +56,12 @@ const send = (file, element) => {
         parent.appendChild(newText);
     }
 
-    // TODO: Encrypt the file before sending it
+    // Encrypt the file
+    gen_RSA_keypair(1024).then((keys) =>
+        console.log(`p=${keys[0]}, s=${keys[1]}`)
+    );
+
+    // Send it
     const data = new FormData();
     data.append("file", file);
 
