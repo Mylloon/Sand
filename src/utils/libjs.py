@@ -21,7 +21,7 @@ def init(commit_hash):
     # Download the js file if needed
     if not exist(f"{path}/{filename}"):
         # Download the font file
-        file_url = f"https://github.com/juanelas/bigint-mod-arith/blob/{commit_hash}/dist/esm/index.browser.js"
+        file_url = f"https://raw.githubusercontent.com/juanelas/bigint-mod-arith/{commit_hash}/dist/esm/index.browser.js"
         data = get(file_url).content
 
         # Save the file
