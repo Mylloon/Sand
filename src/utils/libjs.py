@@ -16,7 +16,7 @@ def init(commit_hash):
     if not exist(path):
         mkdir(path)
 
-    # TODO: Store the version used and redownload on version changes
+    # TODO: Store the hash used and redownload on version changes
 
     # Download the js file if needed
     if not exist(f"{path}/{filename}"):
