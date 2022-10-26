@@ -1,3 +1,5 @@
+from os import mkdir
+
 from requests import get
 
 from utils.misc import exist

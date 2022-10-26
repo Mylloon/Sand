@@ -1,6 +1,3 @@
-from os import mkdir
-
-
 def exist(path):
     """Check if file or directory exists"""
     try:

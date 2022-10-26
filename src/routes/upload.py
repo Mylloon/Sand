@@ -1,5 +1,4 @@
-from config import Config
-from flask import Blueprint, redirect, render_template, request
+from flask import Blueprint, redirect, request
 
 router = Blueprint("upload", __name__)
 
