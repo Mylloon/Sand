@@ -1,13 +1,11 @@
-BigNumber.prototype.floor = function () {
-    return this.integerValue(BigNumber.ROUND_FLOOR);
-};
+import { modInv, modPow } from "./libs/bigint-mod.js";
 
 export const gen_RSA_keypair = async (bits) => {
     const getPrime = (bits) => {
         return new Promise((ok, ko) => {
             forge.prime.generateProbablePrime(bits, (err, data) => {
                 if (err) return ko(err);
-                ok(new BigNumber(data));
+                ok(BigInt(data));
             });
         });
     };
@@ -18,36 +16,59 @@ export const gen_RSA_keypair = async (bits) => {
     const q = await getPrime(pq_size);
     console.assert(p != q);
 
-    const n = p.times(q);
+    const n = p * q;
 
-    const phi_n = p.minus(1).times(q.minus(1));
+    const phi_n = (p - 1n) * (q - 1n);
 
-    const e = new BigNumber(65537);
-    console.assert(e.isLessThan(phi_n) && phi_n.modulo(e) != 0);
+    const e = 65537n;
+    console.assert(e < phi_n && phi_n % e != 0n);
 
-    // https://stackoverflow.com/a/51562038/15436737
-    const inverse = (a, m) => {
-        const s = [];
-        let b = m;
-        while (b) {
-            [a, b] = [b, a % b];
-            s.push({ a, b });
-        }
-        let x = 1;
-        let y = 0;
-        for (let i = s.length - 2; i >= 0; --i) {
-            [x, y] = [y, x - y * Math.floor(s[i].a / s[i].b)];
-        }
+    const d = modInv(e, phi_n);
 
-        return ((y % m) + m) % m;
-    };
-
-    const d = inverse(e, phi_n);
-
-    console.log((e, n), (d, n));
-    return [(e, n), (d, n)];
+    return [
+        [e, n],
+        [d, n],
+    ];
 };
 
-const RSA = () => {};
+const RSA = (msg, key) => {
+    return modPow(msg, key[0], key[1]);
+};
 
-export const RSA_enc = (key, data) => {};
+export const RSA_enc = (data, key) => {
+    return RSA(str_to_int(data)[0], key);
+};
+
+export const RSA_dec = (data, key) => {
+    return int_to_str([RSA(data, key)]);
+};
+
+const str_to_int = (msg) => {
+    let result = "";
+    let table = [];
+    for (let i = 0; i < msg.length; i++) {
+        result += String(msg[i].charCodeAt(0)).padStart(3, "0");
+        if (result.length == 100) {
+            table.push(BigInt(`1${result}`));
+        }
+    }
+    table.push(BigInt(`1${result}`));
+
+    return table;
+};
+
+const int_to_str = (msg) => {
+    let result = "";
+    for (let k = 0; k < msg.length; k++) {
+        let full_msg = msg[k].toString().slice(1);
+        for (let i = 0, step = 3; i < full_msg.length; i += step) {
+            let txt = "";
+            for (let j = 0; j < step; j++) {
+                txt += full_msg.charAt(i + j);
+            }
+            result += String.fromCharCode(parseInt(txt));
+        }
+    }
+
+    return result;
+};

@@ -1,4 +1,4 @@
-import { gen_RSA_keypair, RSA_enc } from "./rsa.js";
+import { gen_RSA_keypair, RSA_dec, RSA_enc } from "./rsa.js";
 
 window.addEventListener("load", () => main());
 
@@ -57,15 +57,18 @@ const send = (file, element) => {
     }
 
     // Encrypt the file
-    gen_RSA_keypair(1024).then((keys) =>
-        console.log(`p=${keys[0]}, s=${keys[1]}`)
-    );
+    file.text().then((content) => {
+        gen_RSA_keypair(1024).then((keys) => {
+            let x = RSA_enc(content, keys[1]);
+            console.log(RSA_dec(x, keys[0]));
 
-    // Send it
-    const data = new FormData();
-    data.append("file", file);
+            // Send it
+            const data = new FormData();
+            data.append("file", file);
 
-    const req = new XMLHttpRequest();
-    req.open("POST", "upload");
-    req.send(data);
+            const req = new XMLHttpRequest();
+            req.open("POST", "upload");
+            req.send(data);
+        });
+    });
 };
