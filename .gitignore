@@ -8,3 +8,4 @@ __pycache__/
 .vscode/
 
 src/public/fonts/
+src/public/js/libs/
