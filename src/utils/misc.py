@@ -1,5 +1,5 @@
 from hashlib import sha256
-from sys import set_int_max_str_digits, version_info
+from sys import set_int_max_str_digits
 
 BYTEORDER = "big"
 
@@ -23,6 +23,6 @@ def int_to_bytes(data: int) -> bytes:
 
 def h(data: str) -> str:
     """Hash un texte"""
-    if version_info[1] >= 11:  # https://docs.python.org/3/library/sys.html#sys.set_int_max_str_digits
-        set_int_max_str_digits(len(data))
+    # https://docs.python.org/3/library/sys.html#sys.set_int_max_str_digits
+    set_int_max_str_digits(len(data))
     return str(int.from_bytes(sha256(int_to_bytes(int(data))).digest(), BYTEORDER))
