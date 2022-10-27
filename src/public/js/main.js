@@ -1,4 +1,8 @@
-import { gen_RSA_keypair, RSA_dec, RSA_enc } from "./rsa.js";
+import {
+    gen_RSA_keypair,
+    RSA_enc_data as RSA_enc,
+    RSA_dec_data as RSA_dec,
+} from "./rsa.js";
 
 window.addEventListener("load", () => main());
 
@@ -79,7 +83,6 @@ const send = (file, element) => {
              * When the user click on the link, he can download the file, asking
              * to the server with the hash of the link and the public key
              * encoded in the URL */
-
         });
     });
 };

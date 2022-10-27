@@ -35,12 +35,30 @@ const RSA = (msg, key) => {
     return modPow(msg, key[0], key[1]);
 };
 
-export const RSA_enc = (data, key) => {
+const RSA_enc = (data, key) => {
     return RSA(str_to_int(data)[0], key);
 };
 
-export const RSA_dec = (data, key) => {
+export const RSA_enc_data = (data, key) => {
+    let encoded = [];
+    data.match(/(.{1,100})/g).forEach((piece) => {
+        encoded.push(RSA_enc(piece, key));
+    });
+
+    return encoded;
+};
+
+const RSA_dec = (data, key) => {
     return int_to_str([RSA(data, key)]);
+};
+
+export const RSA_dec_data = (data, key) => {
+    let decoded = "";
+    data.forEach((piece) => {
+        decoded += RSA_dec(piece, key);
+    });
+
+    return decoded;
 };
 
 const str_to_int = (msg) => {
