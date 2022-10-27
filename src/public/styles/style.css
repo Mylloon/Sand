@@ -11,9 +11,6 @@
         --bg-color: rgb(245, 242, 234);
         --text-color: rgb(6, 5, 3);
         --selection: rgb(232, 226, 208);
-        --link-color: rgb(13, 71, 161);
-        --link-color-hover: rgb(181, 162, 101);
-        --grey: rgb(207, 216, 220);
         --shadow: rgba(0, 0, 0, 0.3);
         --border: rgb(45, 40, 22);
         --area-hover: rgb(184, 150, 48);
@@ -26,9 +23,6 @@
         --bg-color: rgb(19, 16, 9);
         --text-color: rgb(251, 250, 247);
         --selection: rgb(226, 218, 194);
-        --link-color: rgb(100, 181, 246);
-        --link-color-hover: rgb(175, 154, 88);
-        --grey: rgb(55, 71, 79);
         --shadow: rgba(125, 109, 60, 0.3);
         --border: rgb(213, 202, 168);
         --area-hover: rgb(223, 193, 99);
