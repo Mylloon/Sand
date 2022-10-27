@@ -1,6 +1,6 @@
 # Sand
 
-## Exécution
+## Exécution avec Python 3.10.8
 
 Préparation de l'environnement
 
