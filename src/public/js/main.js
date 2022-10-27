@@ -1,8 +1,4 @@
-import {
-    gen_RSA_keypair,
-    RSA_enc_data as RSA_enc,
-    RSA_dec_data as RSA_dec,
-} from "./rsa.js";
+import { gen_RSA_keypair, RSA_enc_data as RSA_enc } from "./rsa.js";
 
 window.addEventListener("load", () => main());
 
@@ -46,27 +42,37 @@ const fetchFile = (list, element = undefined) => {
     }
 };
 
+const update = (element, text, tag = undefined) => {
+    if (element) {
+        let parent = element.parentElement;
+        parent.textContent = "";
+        let newElement = document.createElement(
+            tag === undefined ? element.tagName : tag
+        );
+        newElement.textContent = text;
+        parent.appendChild(newElement);
+
+        return newElement;
+    }
+
+    return undefined;
+};
+
 /**
  * Send a file to the server
  * @param file File to send
  */
 const send = (file, element) => {
-    // Show the user a file is uploading
-    if (element) {
-        let parent = element.parentElement;
-        parent.textContent = "";
-        let newText = document.createElement("h3");
-        newText.textContent = "Téléversement...";
-        parent.appendChild(newText);
-    }
-
-    // Encrypt the file
     file.text().then((content) => {
-        gen_RSA_keypair(1024).then(([pub_key, sec_key]) => {
+        element = update(element, "Génération des clefs...", "H3");
+        gen_RSA_keypair(1024).then(([, sec_key]) => {
+            element = update(element, "Chiffrement du fichier...", "H3");
+
             let data = {
                 file: RSA_enc(content, sec_key).map((v) => v.toString()),
             };
 
+            update(element, "Téléversement...", "H3");
             const req = new XMLHttpRequest();
             req.open("POST", "api/upload");
             req.setRequestHeader("Content-Type", "application/json");
@@ -74,8 +80,8 @@ const send = (file, element) => {
 
             /* Here we need to store the public key and then wait for a response
              * from the server. When the server send us a hash of the file
-             * salted (so 2 same file don't have a different URL) we redirect
-             * the user the a wait page so the uploader can copy a link like:
+             * we redirect the user the a wait page so the uploader can copy
+             * a link like:
              * Wait page: https://d/upload
              * Copy link: https://d/download/hash#pub_key_0:pub_key_1
              * When the user click on the link, he can download the file, asking

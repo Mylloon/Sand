@@ -16,4 +16,4 @@ def upload() -> Response:
             with open(f"{Config.uploads_dir}/{data_hash}", "w") as f:
                 f.write(data)
 
-    return redirect("index")
+    return redirect("/uploaded")
