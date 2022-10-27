@@ -6,4 +6,5 @@ router = Blueprint("index", __name__)
 
 @router.route("")
 def index() -> str:
+    """Index page"""
     return render_template("index.html", config=Config)

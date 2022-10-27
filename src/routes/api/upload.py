@@ -10,6 +10,7 @@ router = Blueprint("upload", __name__)
 
 @router.route("", methods=["POST"])
 def upload() -> Response:
+    """Upload interface (receive file from javascript client)"""
     if request.method == "POST":
         json = request.get_json()
         if json:

@@ -16,4 +16,5 @@ init()
 
 @app.route("/")
 def root() -> Response:
+    """Root page"""
     return redirect("index")
