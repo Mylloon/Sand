@@ -64,19 +64,55 @@ const update = (element, text, tag = undefined) => {
  */
 const send = (file, element) => {
     file.text().then((content) => {
+        const req = new XMLHttpRequest();
+
         element = update(element, "Génération des clefs...", "H3");
-        gen_RSA_keypair(1024).then(([, sec_key]) => {
+        gen_RSA_keypair(1024).then(([pub_key, sec_key]) => {
             element = update(element, "Chiffrement du fichier...", "H3");
 
             let data = {
                 file: RSA_enc(content, sec_key).map((v) => v.toString()),
             };
 
-            update(element, "Téléversement...", "H3");
-            const req = new XMLHttpRequest();
+            element = update(element, "Téléversement...", "H3");
             req.open("POST", "api/upload");
             req.setRequestHeader("Content-Type", "application/json");
             req.send(JSON.stringify(data));
+
+            req.onload = () => {
+                if (req.status == 200) {
+                    /* Change here the area with the copy link */
+                    let url = window.location.href.split("/");
+                    url.pop();
+                    url.push("file");
+
+                    let main_div = element.parentElement.parentElement;
+                    main_div.textContent = "";
+                    let div = document.createElement("DIV");
+                    div.textContent = "Fichier prêt !";
+                    div.className = "link-area";
+                    main_div.appendChild(div);
+
+                    let message = document.createElement("P");
+                    message.innerHTML = `Copiez le lien pour télécharger <code>${file.name}</code>`;
+                    div.appendChild(message);
+
+                    let input = document.createElement("INPUT");
+                    input.value = `${url.join("/")}/${req.responseText.slice(
+                        1,
+                        -2
+                    )}/${pub_key[0]}:${pub_key[1]}`;
+                    input.readOnly = true;
+                    div.appendChild(input);
+
+                    // TODO: Change button textContent on click
+                    let button = document.createElement("BUTTON");
+                    button.textContent = "Copier le lien";
+                    div.appendChild(button);
+                } else {
+                    console.error("Upload failed.");
+                }
+            };
 
             /* Here we need to store the public key and then wait for a response
              * from the server. When the server send us a hash of the file
