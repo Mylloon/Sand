@@ -6,7 +6,18 @@ from utils.misc import exist
 
 
 class Config:
+    # App name
     name = "Sand"
+
+    # Title of the desc in the index page
+    title_desc = "Partage de petits fichiers"
+
+    # Desc of the index page
+    desc = "Sand permet le partage de fichiers. Attention, je n'accepte que \
+            les petits fichiers de quelques <code>ko</code> car je chiffre ton \
+            fichier via RSA 🙂."
+
+    # Directory name where the uploads are stored
     uploads_dir = "uploads"
 
 

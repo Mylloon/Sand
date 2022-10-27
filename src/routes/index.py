@@ -6,4 +6,4 @@ router = Blueprint("index", __name__)
 
 @router.route("")
 def index() -> str:
-    return render_template("index.html", name=Config.name)
+    return render_template("index.html", config=Config)
