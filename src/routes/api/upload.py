@@ -6,8 +6,6 @@ router = Blueprint("upload", __name__)
 @router.route("", methods=["POST"])
 def upload():
     if request.method == "POST":
-        if "file" in request.files:
-            file = request.files["file"]
-            print(file)
+        print(request.get_data())
 
     return redirect("index")

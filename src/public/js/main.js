@@ -62,24 +62,23 @@ const send = (file, element) => {
 
     // Encrypt the file
     file.text().then((content) => {
-        gen_RSA_keypair(1024).then((keys) => {
-            let x = RSA_enc(content, keys[1]);
-            console.log(RSA_dec(x, keys[0]));
+        gen_RSA_keypair(1024).then(([pub_key, sec_key]) => {
+            let encoded_file = RSA_enc(content, sec_key);
 
             // Send it
             const data = new FormData();
-            data.append("file", file);
+            data.append("file", encoded_file);
 
             const req = new XMLHttpRequest();
-            req.open("POST", "upload");
+            req.open("POST", "api/upload");
             req.send(data);
 
             /* Here we need to store the public key and then wait for a response
              * from the server. When the server send us a hash of the file
              * salted (so 2 same file don't have a different URL) we redirect
              * the user the a wait page so the uploader can copy a link like:
-             * Wait page: https://d/done
-             * Copy link: https://d/file/hash#pub_key_0:pub_key_1
+             * Wait page: https://d/upload
+             * Copy link: https://d/download/hash#pub_key_0:pub_key_1
              * When the user click on the link, he can download the file, asking
              * to the server with the hash of the link and the public key
              * encoded in the URL */
