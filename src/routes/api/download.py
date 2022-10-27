@@ -1,8 +1,9 @@
-from flask import Blueprint, redirect, request
+from flask import Blueprint, redirect
+from werkzeug.wrappers.response import Response
 
 router = Blueprint("download", __name__)
 
 
 @router.route("", methods=["POST"])
-def download():
+def download() -> Response:
     return redirect("index")

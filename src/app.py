@@ -1,4 +1,5 @@
 from flask import Flask, redirect
+from werkzeug.wrappers.response import Response
 
 from config import init
 from routes.api.download import router as api_download
@@ -14,5 +15,5 @@ init()
 
 
 @app.route("/")
-def root():
+def root() -> Response:
     return redirect("index")

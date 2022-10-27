@@ -10,7 +10,7 @@ class Config:
     uploads_dir = "uploads"
 
 
-def init():
+def init() -> None:
     # Download dependencies
     init_font("1.3.0")
     init_libjs("fc5e3c53e41490e24ca7f67cb24e7ab389b770f9")

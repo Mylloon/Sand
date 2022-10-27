@@ -5,7 +5,7 @@ from requests import get
 from utils.misc import exist
 
 
-def init(commit_hash):
+def init(commit_hash: str) -> None:
     """ Download JS libraries"""
     path = "./src/public/js/libs"
     filename = "bigint-mod.js"

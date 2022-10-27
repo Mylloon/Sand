@@ -1,12 +1,13 @@
 from config import Config
 from flask import Blueprint, redirect, request
 from utils.misc import h
+from werkzeug.wrappers.response import Response
 
 router = Blueprint("upload", __name__)
 
 
 @router.route("", methods=["POST"])
-def upload():
+def upload() -> Response:
     if request.method == "POST":
         json = request.get_json()
         if json:

@@ -5,7 +5,7 @@ from requests import get
 from utils.misc import exist
 
 
-def init(version):
+def init(version: str) -> None:
     """ Download font """
     path = "./src/public/fonts"
     filename = "RiluRegular.ttf"
