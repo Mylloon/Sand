@@ -9,3 +9,5 @@ __pycache__/
 
 src/public/fonts/
 src/public/js/libs/
+
+uploads/

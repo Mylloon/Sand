@@ -63,15 +63,14 @@ const send = (file, element) => {
     // Encrypt the file
     file.text().then((content) => {
         gen_RSA_keypair(1024).then(([pub_key, sec_key]) => {
-            let encoded_file = RSA_enc(content, sec_key);
-
-            // Send it
-            const data = new FormData();
-            data.append("file", encoded_file);
+            let data = {
+                file: RSA_enc(content, sec_key).map((v) => v.toString()),
+            };
 
             const req = new XMLHttpRequest();
             req.open("POST", "api/upload");
-            req.send(data);
+            req.setRequestHeader("Content-Type", "application/json");
+            req.send(JSON.stringify(data));
 
             /* Here we need to store the public key and then wait for a response
              * from the server. When the server send us a hash of the file
