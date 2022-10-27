@@ -21,8 +21,8 @@ def int_to_bytes(data: int) -> bytes:
     return data.to_bytes((data.bit_length() + 7) // 8, BYTEORDER)
 
 
-def h(data: str) -> str:
-    """Hash un texte"""
+def h(string: str) -> str:
+    """Hash a string"""
     # https://docs.python.org/3/library/sys.html#sys.set_int_max_str_digits
-    set_int_max_str_digits(len(data))
-    return str(int.from_bytes(sha256(int_to_bytes(int(data))).digest(), BYTEORDER))
+    set_int_max_str_digits(len(string))
+    return str(int.from_bytes(sha256(int_to_bytes(int(string))).digest(), BYTEORDER))
