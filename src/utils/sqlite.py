@@ -1,5 +1,5 @@
 from os import mkdir
-from sqlite3 import connect
+from sqlite3 import Cursor, connect
 
 from utils.misc import exist
 
@@ -7,7 +7,7 @@ from utils.misc import exist
 class Database:
     """Handle SQLite3 database"""
 
-    def __init__(self, path: str, filename: str):
+    def __init__(self, path: str, filename: str) -> None:
         if not exist(path):
             mkdir(path)
 
@@ -17,7 +17,7 @@ class Database:
 
         self.fullpath = fullpath
 
-    def request(self, request: str, valeurs=None):
+    def request(self, request: str, valeurs=None) -> tuple[Cursor, int | None]:
         """Send a request to the database"""
         connection = connect(self.fullpath)
         cursor = connection.cursor()
@@ -35,7 +35,7 @@ class Database:
     def format(self, keys, cursor: tuple) -> dict:
         """Format sqlite request's result as dict"""
         values = []
-        if cursor != None:
+        if cursor[0] != None:
             datas = cursor[0].fetchall()
             for data in datas[0]:
                 values.append(data)
@@ -53,7 +53,7 @@ class Database:
 class FilesDB(Database):
     """Handle files in sqlite3 database"""
 
-    def __init__(self, path: str, filename: str):
+    def __init__(self, path: str, filename: str) -> None:
         super().__init__(path, filename)
         self.table_name = "files"
 
@@ -61,7 +61,7 @@ class FilesDB(Database):
             f"CREATE TABLE IF NOT EXISTS {self.table_name} \
               (filename TEXT, date INTEGER);")
 
-    def add_file(self, filename: str, date: int):
+    def add_file(self, filename: str, date: int) -> None:
         """Add a file"""
         self.request(
             f"INSERT INTO {self.table_name} (filename, date) VALUES (?, ?);",
