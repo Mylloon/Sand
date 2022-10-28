@@ -77,6 +77,10 @@ const send = (file, element) => {
         gen_RSA_keypair(1024).then(([pub_key, sec_key]) => {
             element = update(element, "Chiffrement du fichier...", "H3");
 
+            if (content.length == 0) {
+                update(element, "Fichier vide.", "H3");
+                return;
+            }
             let data = {
                 file: RSA_enc(content, sec_key).join(","),
                 filename: RSA_enc(file.name, sec_key).join(","),
