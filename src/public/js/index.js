@@ -90,10 +90,12 @@ const send = (file, element) => {
 
         const req = new XMLHttpRequest();
 
-        element = update(element, "Génération des clefs...", "H3");
+        element = update(
+            element,
+            "Génération des clefs et chiffrement du fichier...",
+            "H3"
+        );
         gen_RSA_keypair(1024).then(([pub_key, sec_key]) => {
-            element = update(element, "Chiffrement du fichier...", "H3");
-
             let data = {
                 file: RSA_enc(content, sec_key).join(","),
                 filename: RSA_enc(file.name, sec_key).join(","),
