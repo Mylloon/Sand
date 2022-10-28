@@ -130,16 +130,6 @@ const send = (file, element) => {
                     console.error("Upload failed.");
                 }
             };
-
-            /* Here we need to store the public key and then wait for a response
-             * from the server. When the server send us a hash of the file
-             * we redirect the user the a wait page so the uploader can copy
-             * a link like:
-             * Wait page: https://d/upload
-             * Copy link: https://d/download/hash#pub_key_0:pub_key_1
-             * When the user click on the link, he can download the file, asking
-             * to the server with the hash of the link and the public key
-             * encoded in the URL */
         });
     });
 };
