@@ -73,7 +73,8 @@ main {
 }
 
 .upload-area,
-.link-area {
+.link-area,
+.download-area {
     border: 2px dashed var(--border);
     height: 70vh;
     width: 65vw;
@@ -124,7 +125,8 @@ main {
     outline: none;
 }
 
-.link-area > button {
+.link-area > button,
+.download-area > button {
     border-radius: 6px;
     border: 2px solid var(--shadow);
     width: 50%;
@@ -137,7 +139,8 @@ main {
     cursor: pointer;
 }
 
-.link-area > button:hover {
+.link-area > button:hover,
+.download-area > button:hover {
     background-color: var(--text-color);
     color: var(--bg-color);
     box-shadow: 0 4px 15px 0 var(--shadow), 0 4px 15px 0 var(--shadow);
@@ -150,7 +153,8 @@ main {
     }
 
     .upload-area,
-    .link-area {
+    .link-area,
+    .download-area {
         height: 65vh;
     }
 }
@@ -162,7 +166,9 @@ main {
         flex-direction: column;
     }
 
-    .upload-area {
+    .upload-area,
+    .link-area,
+    .download-area {
         width: 35vw;
         height: 55vh;
     }
