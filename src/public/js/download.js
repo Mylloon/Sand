@@ -30,10 +30,30 @@ const main = () => {
                     pub_key
                 );
 
-                console.log(decrypted_file);
+                // Send the file to the user
+                const blob = new Blob([decrypted_file], {
+                    type: "application/json",
+                });
+                const url = URL.createObjectURL(blob);
+                download(url, "text.txt"); // Retrieve the original filename
             } else {
                 console.error("Download failed.");
             }
         };
     });
+};
+
+/**
+ * Ask the user to download a file
+ * @param path URL
+ * @param filename filename
+ */
+const download = (path, filename) => {
+    const anchor = document.createElement("A");
+    anchor.href = path;
+    anchor.download = filename;
+
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
 };
