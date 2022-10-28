@@ -1,5 +1,7 @@
 # Sand
 
+Partage de petits fichiers ASCII de façon sécurisée avec RSA.
+
 ## Exécution avec Python 3.9.2
 
 Préparation de l'environnement
