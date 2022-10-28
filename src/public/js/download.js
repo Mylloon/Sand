@@ -35,9 +35,9 @@ const main = () => {
                 );
 
                 // Send the file to the user
-                const blob = new Blob([decrypted_file], {
-                    type: "application/json",
-                });
+                const blob = new Blob([
+                    atob(decrypted_file.split(";base64,").pop()),
+                ]);
                 const url = URL.createObjectURL(blob);
                 download(url, decrypted_filename);
             } else {

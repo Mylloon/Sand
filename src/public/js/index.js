@@ -70,7 +70,10 @@ const update = (element, text, tag = undefined) => {
  * @param file File to send
  */
 const send = (file, element) => {
-    file.text().then((content) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+        const content = reader.result.split(";base64,").pop();
         const req = new XMLHttpRequest();
 
         element = update(element, "Génération des clefs...", "H3");
@@ -135,5 +138,5 @@ const send = (file, element) => {
                 }
             };
         });
-    });
+    };
 };
