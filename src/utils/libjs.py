@@ -16,8 +16,6 @@ def init(commit_hash: str) -> None:
     if not exist(path):
         mkdir(path)
 
-    # TODO: Store the hash used and redownload on version changes
-
     # Download the js file if needed
     if not exist(f"{path}/{filename}"):
         # Download the font file

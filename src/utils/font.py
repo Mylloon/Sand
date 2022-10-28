@@ -16,8 +16,6 @@ def init(version: str) -> None:
     if not exist(path):
         mkdir(path)
 
-    # TODO: Store the version used and redownload on version changes
-
     # Download the font file if needed
     if not exist(f"{path}/{filename}"):
         # Download the font file

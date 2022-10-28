@@ -16,8 +16,8 @@ class Config:
 
     # Desc of the index page
     desc = "Sand permet le partage de fichiers. Attention, je n'accepte que \
-            les petits fichiers de quelques <code>ko</code> car je chiffre ton \
-            fichier via RSA 🙂.<br><br>Les fichiers sont herbergés 24 heures."
+            les petits fichiers de quelques <code>ko</code> car je chiffre via \
+            RSA 🙂.<br><br>Ne supportes que les fichiers ASCII."
 
     # Directory name where the uploads are stored
     uploads_dir = "uploads"
@@ -35,8 +35,3 @@ def init() -> None:
     # Create upload folder if doesn't exists
     if not exist(Config.uploads_dir):
         mkdir(Config.uploads_dir)
-
-# TODO: Clear every t mins the uploads directory and database
-# TODO: On init, check if files in db are corresponding to the files stored
-#       in the uploads_dir (for example if some files are on the disk and not
-#       in the database)
