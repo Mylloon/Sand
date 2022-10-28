@@ -59,15 +59,21 @@ class FilesDB(Database):
 
         self.request(
             f"CREATE TABLE IF NOT EXISTS {self.table_name} \
-              (filename TEXT, date INTEGER);")
+              (hash TEXT, filename TEXT, date INTEGER);")
 
-    def add_file(self, filename: str, date: int) -> None:
+    def add_file(self, hash_file: str, filename: str, date: int) -> None:
         """Add a file"""
         self.request(
-            f"INSERT INTO {self.table_name} (filename, date) VALUES (?, ?);",
-            [filename, date])
+            f"INSERT INTO {self.table_name} (hash, filename, date) VALUES (?, ?, ?);",
+            [hash_file, filename, date])
 
-    def remove_file(self, filename: str) -> None:
+    def remove_file(self, hash_file: str) -> None:
         """Remove a file"""
         self.request(
-            f"DELETE FROM {self.table_name} WHERE filename = ?", filename)
+            f"DELETE FROM {self.table_name} WHERE hash = ?", hash_file)
+
+    def get_filename(self, hash_file: str) -> dict:
+        """Return the filename of a specific file"""
+        query = "filename"
+        return self.format(query, self.request(
+            f"SELECT {query} FROM {self.table_name} WHERE hash = ?", hash_file))

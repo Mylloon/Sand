@@ -22,11 +22,15 @@ const main = () => {
         req.onload = () => {
             if (req.status == 200) {
                 // Decrypt the file
+                const json = JSON.parse(req.responseText);
                 const decrypted_file = RSA_dec(
-                    req.responseText
-                        .slice(1, -2)
-                        .split(",")
-                        .map((v) => BigInt(v)),
+                    json.file.split(",").map((v) => BigInt(v)),
+                    pub_key
+                );
+
+                // Decrypt the filename
+                const decrypted_filename = RSA_dec(
+                    json.filename.split(",").map((v) => BigInt(v)),
                     pub_key
                 );
 
@@ -35,7 +39,7 @@ const main = () => {
                     type: "application/json",
                 });
                 const url = URL.createObjectURL(blob);
-                download(url, "text.txt"); // Retrieve the original filename
+                download(url, decrypted_filename);
             } else {
                 console.error("Download failed.");
             }

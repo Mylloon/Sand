@@ -14,12 +14,12 @@ def upload() -> Response:
     json = request.get_json()
     if json:
         data = "".join(json["file"])
+        filename = "".join(json["filename"])
         data_hash = hash_data(data.replace(",", ""))
         with open(f"{Config.uploads_dir}/{data_hash}", 'w') as f:
             f.write(data)
 
-        # Maybe add the encrypted filename ?
-        Config.database.add_file(data_hash, int(time()))
+        Config.database.add_file(data_hash, filename, int(time()))
 
         # Send the hash to the javascript client
         return jsonify(data_hash)
