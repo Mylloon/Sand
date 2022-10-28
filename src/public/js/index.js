@@ -70,8 +70,9 @@ const send = (file, element) => {
         gen_RSA_keypair(1024).then(([pub_key, sec_key]) => {
             element = update(element, "Chiffrement du fichier...", "H3");
 
+            console.log(RSA_enc(content, sec_key));
             let data = {
-                file: RSA_enc(content, sec_key).map((v) => v.toString()),
+                file: RSA_enc(content, sec_key).join(","),
             };
 
             element = update(element, "Téléversement...", "H3");
@@ -109,7 +110,6 @@ const send = (file, element) => {
                     input.readOnly = true;
                     div.appendChild(input);
 
-                    // TODO: Change button textContent on click
                     let button = document.createElement("BUTTON");
                     button.textContent = "Copier le lien";
                     div.appendChild(button);
