@@ -71,9 +71,9 @@ const update = (element, text, tag = undefined) => {
  */
 const send = (file, element) => {
     let reader = new FileReader();
-    reader.readAsDataURL(file);
+    reader.readAsText(file);
     reader.onload = () => {
-        const content = reader.result.split(";base64,").pop();
+        const content = btoa(encodeURIComponent(reader.result));
 
         if (file.size > 512000 || file.size == 0) {
             let message = file.size == 0 ? "vide" : "trop lourd (max ~500ko)";

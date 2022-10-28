@@ -36,7 +36,7 @@ const main = () => {
 
                 // Send the file to the user
                 const blob = new Blob([
-                    atob(decrypted_file.split(";base64,").pop()),
+                    decodeURIComponent(atob(decrypted_file)),
                 ]);
                 const url = URL.createObjectURL(blob);
                 download(url, decrypted_filename);
