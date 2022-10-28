@@ -81,7 +81,14 @@ const send = (file, element) => {
             element = update(element, "Chiffrement du fichier...", "H3");
 
             if (content.length == 0) {
-                update(element, "Fichier vide.", "H3");
+                update(
+                    element,
+                    "Fichier vide, cliquez pour revenir en arrière.",
+                    "H3"
+                ).parentElement.addEventListener("click", () => {
+                    location.href = "/";
+                });
+
                 return;
             }
             let data = {
