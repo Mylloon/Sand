@@ -33,7 +33,7 @@ def init() -> None:
     """Initialise everything before running the flask server"""
     # Download dependencies
     init_font("1.3.0")
-    init_libjs("fc5e3c53e41490e24ca7f67cb24e7ab389b770f9")
+    init_libjs("3.1.2")
 
     # Create upload folder if doesn't exists
     if not exist(Config.uploads_dir):

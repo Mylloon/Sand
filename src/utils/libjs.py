@@ -5,7 +5,7 @@ from requests import get
 from utils.misc import exist
 
 
-def init(commit_hash: str) -> None:
+def init(version: str) -> None:
     """ Download JS libraries"""
     path = "./src/public/js/libs"
     filename = "bigint-mod.js"
@@ -19,7 +19,7 @@ def init(commit_hash: str) -> None:
     # Download the js file if needed
     if not exist(f"{path}/{filename}"):
         # Download the font file
-        file_url = f"https://raw.githubusercontent.com/juanelas/bigint-mod-arith/{commit_hash}/dist/esm/index.browser.js"
+        file_url = f"https://raw.githubusercontent.com/juanelas/bigint-mod-arith/v{version}/dist/esm/index.browser.js"
         data = get(file_url).content
 
         # Save the file
