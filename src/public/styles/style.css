@@ -15,6 +15,7 @@
         --border: rgb(45, 40, 22);
         --area-hover: rgb(184, 150, 48);
         --font-size: 17px;
+        --font: Rilu;
     }
 }
 
@@ -27,6 +28,7 @@
         --border: rgb(213, 202, 168);
         --area-hover: rgb(223, 193, 99);
         --font-size: 17px;
+        --font: Rilu;
     }
 }
 
@@ -38,7 +40,7 @@
 html {
     background-color: var(--bg-color);
     color: var(--text-color);
-    font-family: Rilu;
+    font-family: var(--font);
     font-size: var(--font-size);
     scroll-behavior: smooth;
 }
@@ -105,13 +107,50 @@ main {
     padding-left: 1em;
 }
 
+.link-area > input {
+    border-radius: 6px;
+    border: 2px solid var(--shadow);
+    width: 49%;
+    height: 3vh;
+    margin: 0.5vw;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font);
+    font-size: calc(var(--font-size) - 5px);
+}
+
+.link-area > input:focus {
+    border: 2px solid var(--border);
+    outline: none;
+}
+
+.link-area > button {
+    border-radius: 6px;
+    border: 2px solid var(--shadow);
+    width: 50%;
+    height: 5vh;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font);
+    font-size: var(--font-size);
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.link-area > button:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    box-shadow: 0 4px 15px 0 var(--shadow), 0 4px 15px 0 var(--shadow);
+}
+
 /* Mobile display */
 @media only screen and (max-height: 850px) {
     header > .text-title {
         font-size: 1.5rem;
     }
 
-    .upload-area {
+    .upload-area,
+    .link-area {
         height: 65vh;
     }
 }

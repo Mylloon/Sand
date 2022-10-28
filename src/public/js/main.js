@@ -85,23 +85,27 @@ const send = (file, element) => {
                     let url = window.location.href.split("/");
                     url.pop();
                     url.push("file");
+                    let link = `${url.join("/")}/${req.responseText.slice(
+                        1,
+                        -2
+                    )}/${pub_key[0]}:${pub_key[1]}`;
 
                     let main_div = element.parentElement.parentElement;
                     main_div.textContent = "";
                     let div = document.createElement("DIV");
-                    div.textContent = "Fichier prêt !";
                     div.className = "link-area";
                     main_div.appendChild(div);
+
+                    let div_title = document.createElement("H4");
+                    div_title.textContent = "Fichier prêt !";
+                    div.appendChild(div_title);
 
                     let message = document.createElement("P");
                     message.innerHTML = `Copiez le lien pour télécharger <code>${file.name}</code>`;
                     div.appendChild(message);
 
                     let input = document.createElement("INPUT");
-                    input.value = `${url.join("/")}/${req.responseText.slice(
-                        1,
-                        -2
-                    )}/${pub_key[0]}:${pub_key[1]}`;
+                    input.value = link;
                     input.readOnly = true;
                     div.appendChild(input);
 
@@ -109,6 +113,12 @@ const send = (file, element) => {
                     let button = document.createElement("BUTTON");
                     button.textContent = "Copier le lien";
                     div.appendChild(button);
+
+                    button.addEventListener("click", () => {
+                        navigator.clipboard
+                            .writeText(link)
+                            .then(() => (button.textContent = "Lien copié !"));
+                    });
                 } else {
                     console.error("Upload failed.");
                 }
