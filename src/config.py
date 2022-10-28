@@ -17,7 +17,7 @@ class Config:
     # Desc of the index page
     desc = "Sand permet le partage de fichiers. Attention, je n'accepte que \
             les petits fichiers de quelques <code>ko</code> car je chiffre via \
-            RSA 🙂.<br><br>Ne supportes que les fichiers ASCII."
+            RSA 🙂.<br><br>Ne supportes pas les binaires."
 
     # Footer of webpages
     footer = "NPNO"
