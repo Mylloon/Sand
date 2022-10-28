@@ -19,6 +19,9 @@ class Config:
             les petits fichiers de quelques <code>ko</code> car je chiffre via \
             RSA 🙂.<br><br>Ne supportes que les fichiers ASCII."
 
+    # Footer of webpages
+    footer = "NPNO"
+
     # Directory name where the uploads are stored
     uploads_dir = "uploads"
 
