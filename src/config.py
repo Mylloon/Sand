@@ -34,7 +34,7 @@ def init() -> None:
 
     # Create upload folder if doesn't exists
     if not exist(Config.uploads_dir):
-        mkdir(path=Config.uploads_dir)
+        mkdir(Config.uploads_dir)
 
 # TODO: Clear every t mins the uploads directory and database
 # TODO: On init, check if files in db are corresponding to the files stored

@@ -1,5 +1,5 @@
 from os import mkdir
-from sqlite3 import Cursor, connect
+from sqlite3 import connect
 
 from utils.misc import exist
 
@@ -17,7 +17,7 @@ class Database:
 
         self.fullpath = fullpath
 
-    def request(self, request: str, valeurs=None) -> tuple[Cursor, int | None]:
+    def request(self, request: str, valeurs=None) -> tuple:
         """Send a request to the database"""
         connection = connect(self.fullpath)
         cursor = connection.cursor()
