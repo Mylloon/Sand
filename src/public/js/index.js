@@ -74,23 +74,26 @@ const send = (file, element) => {
     reader.readAsDataURL(file);
     reader.onload = () => {
         const content = reader.result.split(";base64,").pop();
+
+        if (file.size > 512000 || file.size == 0) {
+            let message = file.size == 0 ? "vide" : "trop lourd (max ~500ko)";
+            update(
+                element,
+                `Fichier ${message}, cliquez pour revenir en arrière.`,
+                "H3"
+            ).parentElement.addEventListener("click", () => {
+                location.href = "/";
+            });
+
+            return;
+        }
+
         const req = new XMLHttpRequest();
 
         element = update(element, "Génération des clefs...", "H3");
         gen_RSA_keypair(1024).then(([pub_key, sec_key]) => {
             element = update(element, "Chiffrement du fichier...", "H3");
 
-            if (content.length == 0) {
-                update(
-                    element,
-                    "Fichier vide, cliquez pour revenir en arrière.",
-                    "H3"
-                ).parentElement.addEventListener("click", () => {
-                    location.href = "/";
-                });
-
-                return;
-            }
             let data = {
                 file: RSA_enc(content, sec_key).join(","),
                 filename: RSA_enc(file.name, sec_key).join(","),
