@@ -1,5 +1,3 @@
-from time import time
-
 from config import Config
 from flask import Blueprint, jsonify, redirect, request
 from utils.misc import hash_data
@@ -19,7 +17,7 @@ def upload() -> Response:
         with open(f"{Config.uploads_dir}/{data_hash}", 'w') as f:
             f.write(data)
 
-        Config.database.add_file(data_hash, filename, int(time()))
+        Config.database.add_file(data_hash, filename)
 
         # Send the hash to the javascript client
         return jsonify(data_hash)

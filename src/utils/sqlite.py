@@ -59,13 +59,13 @@ class FilesDB(Database):
 
         self.request(
             f"CREATE TABLE IF NOT EXISTS {self.table_name} \
-              (hash TEXT, filename TEXT, date INTEGER);")
+              (hash TEXT, filename TEXT);")
 
-    def add_file(self, hash_file: str, filename: str, date: int) -> None:
+    def add_file(self, hash_file: str, filename: str) -> None:
         """Add a file"""
         self.request(
-            f"INSERT INTO {self.table_name} (hash, filename, date) VALUES (?, ?, ?);",
-            [hash_file, filename, date])
+            f"INSERT INTO {self.table_name} (hash, filename) VALUES (?, ?);",
+            [hash_file, filename])
 
     def remove_file(self, hash_file: str) -> None:
         """Remove a file"""
