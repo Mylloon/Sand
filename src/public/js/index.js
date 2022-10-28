@@ -42,6 +42,13 @@ const fetchFile = (list, element = undefined) => {
     }
 };
 
+/**
+ * Update an element
+ * @param element Element to update
+ * @param text Content of the tag
+ * @param tag Optional: specify a new tag
+ * @returns new element
+ */
 const update = (element, text, tag = undefined) => {
     if (element) {
         let parent = element.parentElement;

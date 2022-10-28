@@ -1,5 +1,10 @@
 import { modInv, modPow } from "./libs/bigint-mod.js";
 
+/**
+ * Generate a new RSA keypair
+ * @param bits Key size
+ * @returns RSA keypair
+ */
 export const gen_RSA_keypair = async (bits) => {
     const getPrime = (bits) => {
         return new Promise((ok, ko) => {
@@ -31,14 +36,32 @@ export const gen_RSA_keypair = async (bits) => {
     ];
 };
 
+/**
+ * RSA algorithm
+ * @param msg data
+ * @param key RSA key used
+ * @returns Encrypted data
+ */
 const RSA = (msg, key) => {
     return modPow(msg, key[0], key[1]);
 };
 
+/**
+ * Encrypt a string with RSA
+ * @param data string
+ * @param key RSA key used
+ * @returns Int
+ */
 const RSA_enc = (data, key) => {
     return RSA(str_to_int(data)[0], key);
 };
 
+/**
+ * Encrypt a big string with RSA
+ * @param data big string
+ * @param key RSA key used
+ * @returns Int array
+ */
 export const RSA_enc_data = (data, key) => {
     let encoded = [];
     data.match(/(.{1,100})/g).forEach((piece) => {
@@ -48,10 +71,22 @@ export const RSA_enc_data = (data, key) => {
     return encoded;
 };
 
+/**
+ * Decrypt a int to a string with RSA
+ * @param data int
+ * @param key RSA key used
+ * @returns string
+ */
 const RSA_dec = (data, key) => {
     return int_to_str([RSA(data, key)]);
 };
 
+/**
+ * Decrypt a int array to a string with RSA
+ * @param data int array
+ * @param key RSA key used
+ * @returns big string
+ */
 export const RSA_dec_data = (data, key) => {
     let decoded = "";
     data.forEach((piece) => {
@@ -61,6 +96,11 @@ export const RSA_dec_data = (data, key) => {
     return decoded;
 };
 
+/**
+ * Convert a string to an int (ASCII)
+ * @param msg string
+ * @returns int (ASCII)
+ */
 const str_to_int = (msg) => {
     let result = "";
     let table = [];
@@ -75,6 +115,11 @@ const str_to_int = (msg) => {
     return table;
 };
 
+/**
+ * Convert a int to string (ASCII)
+ * @param msg int (ASCII)
+ * @returns string
+ */
 const int_to_str = (msg) => {
     let result = "";
     for (let k = 0; k < msg.length; k++) {
