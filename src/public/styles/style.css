@@ -49,8 +49,11 @@ html {
     text-align: center;
 }
 
-header > .text-title {
+header > .text-title,
+.text-title > a {
     font-size: 2.5rem;
+    color: var(--text-color);
+    text-decoration: none;
 }
 
 main {
