@@ -88,7 +88,7 @@ const send = (file, element) => {
                     let link = `${url.join("/")}/${req.responseText.slice(
                         1,
                         -2
-                    )}/${pub_key[0]}:${pub_key[1]}`;
+                    )}#${pub_key[0]}:${pub_key[1]}`;
 
                     let main_div = element.parentElement.parentElement;
                     main_div.textContent = "";
