@@ -122,13 +122,13 @@ src
 │  └── index.html
 └── utils
    ├── font.py -------> Permets de télécharger la police
-   ├── libjs.py ------> Permets de télécharger la librarie Javascript
+   ├── libjs.py ------> Permets de télécharger la librairie Javascript
    ├── misc.py -------> Entre autres, implémente la fonction de hashage
    └── sqlite.py -----> Gère ce qui est en rapport avec SQLite
 ```
 
 ### Schéma récapitulatif
 
-<!-- Excalidraw URL: https://excalidraw.com/#json=140empN7z1NEAYRzKaqGT,LWw3rGV3z46-I724iAoCdQ -->
+<!-- Excalidraw URL: https://excalidraw.com/#json=haQHQD0NNGvLlwWRbxtCf,vycO21NGXKOUAS7nnFm2YA -->
 
-![](https://i.imgur.com/IPhwrUZ.png)
+![](https://i.imgur.com/rZu2AZS.png)
